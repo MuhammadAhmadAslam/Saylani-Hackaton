@@ -83,7 +83,7 @@ onAuthStateChanged(auth, (user) => {
                             <div class="description">
                             <h1> ${data.posts.title} </h1>
                                <p id="text">${data.posts.text.substring(0, 200)}
-                                 ${data.posts.text.length > 200 ? ".... <button id='readMore' onclick='readMoreBtn()'>Read more</button>" : ''}
+                                 ${data.posts.text.length > 200 ? ".... <a href='makepost.html'>Read More</a>" : ''}
                                </p>
                               
                             </div>
@@ -103,6 +103,8 @@ onAuthStateChanged(auth, (user) => {
     // User is signed out
   }
 })
+
+
 
 window.addEventListener('click', () => {
 
