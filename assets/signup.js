@@ -72,7 +72,8 @@ const provider = new GoogleAuthProvider();
 const db = getFirestore(app);
 
 
-function signUpFunction() {
+function signUpFunction(event) {
+  event.preventDefault()
   const toast = document.querySelector('.toast')
   const signupEmail = document.getElementById('signup-email')
   const signupPassword = document.getElementById('signup-password')
@@ -114,7 +115,8 @@ let signupbtn = document.getElementById('signupbtn')
 
 signupbtn.addEventListener('click', signUpFunction);
 
-let googleAuthenticationFunction = () => {
+let googleAuthenticationFunction = (event) => {
+  event.preventDefault()
   signInWithPopup(auth, provider)
     .then((result) => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -138,7 +140,8 @@ let googleAuthenticationFunction = () => {
       });
     });
 }
-let googleLoginFunction = () => {
+let googleLoginFunction = (event) => {
+  event.preventDefault()
   signInWithPopup(auth, provider)
     .then((result) => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -177,7 +180,8 @@ const loginEmail = document.getElementById('login-email'),
   loginBtn = document.getElementById('loginBtn')
 
 
-let loginAuthenticate = () => {
+let loginAuthenticate = (event) => {
+  event.preventDefault()
   signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value)
     .then((userCredential) => {
       const user = userCredential.user;

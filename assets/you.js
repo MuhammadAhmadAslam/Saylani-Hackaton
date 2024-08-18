@@ -36,23 +36,80 @@ const provider = new GoogleAuthProvider();
 const db = getFirestore(app);
 
 
+let row = document.getElementById('row')
+let email = document.getElementById('email')
+let name = document.getElementById('name')
 onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
-    console.log(user);
+    // console.log(uid);
+    
+    onSnapshot(collection(db, "UserDetails"), (snapshot) => {
+      snapshot.forEach((doc) => {
+        let data = doc.data()
+    
+        
+        if (uid == data.userUid) {
+          // console.log('mil gaya')
+          let data = doc.data()
+          // console.log(data, 'data hae');
+          email.innerHTML = user.email
+          name.innerText = data.userName
+          let UserKaname = data.userName
+          let img = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTdD2LkrqGa6G0A-JObFZNgHdbTDgXW-m2KQ&s'
 
+          // Clear the row innerHTML to prevent duplicate posts
+          row.innerHTML = '';
+
+          onSnapshot(collection(db, "UserPosts"), (snapshot) => {
+            let hasPosts = false;
+            snapshot.forEach((doc) => {
+              let data = doc.data()
+              // console.log(data , "user post data");
+              // console.log(uid == data.userUid , "dekhtae hae" , uid , data.userUid);
+              if (uid== data.userUid) {
+                hasPosts = true;
+                row.innerHTML += `<div class="col-sm-12 col-lg-4 col-md-6 blog-card">
+
+                              <div class="title">
+                              <span id='span'>
+                                  <img src=${img} alt="" width="4%" height='auto' style="border-radius: 80%;">
+                                  <div class='nameDate'>
+                                <h1>${UserKaname.charAt(0).toUpperCase()}${UserKaname.slice(1)}</h1>
+                                <p>${data.posts.timestamp}</p>
+                                </div>
+                                </span>
+                            </div>
+                            <div class="description">
+                            <h1> ${data.posts.title} </h1>
+                               <p id="text">${data.posts.text.substring(0, 200)}
+                                 ${data.posts.text.length > 200 ? ".... <button id='readMore' onclick='readMoreBtn()'>Read more</button>" : ''}
+                               </p>
+                              
+                            </div>
+                        </div>`
+
+                     
+              }
+            })
+            if (!hasPosts) {
+              alert("Post Please");
+            }
+          })
+        }
+      })
+    })
   } else {
-    window.location.href = 'signup.html'
+    // User is signed out
   }
-
-});
+})
 
 window.addEventListener('click', () => {
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
       const uid = user.uid;
-      console.log(user);
+      // console.log(user);
 
     } else {
       window.location.href = 'signup.html'
@@ -61,58 +118,58 @@ window.addEventListener('click', () => {
   });
 
 })
-let row = document.getElementById('row')
-let email = document.getElementById('email')
-let name = document.getElementById('name')
-onSnapshot(collection(db, "UserDetails"), (snapshot) => {
-  snapshot.forEach((doc) => {
-    let data = doc.data()
-    console.log(data.userUid)
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const uid = user.uid;
-        if (uid == data.userUid) {
-          console.log('mil gaya')
-          let data = doc.data()
-          console.log(data, 'data hae');
-          email.innerHTML = user.email
-          name.innerText = data.userName
-          let UserKaname = data.userName
-          let img = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTdD2LkrqGa6G0A-JObFZNgHdbTDgXW-m2KQ&s'
-          onSnapshot(collection(db, "UserPosts"), (snapshot) => {
-            snapshot.forEach((doc) => {
-              let data = doc.data()
-              row.innerHTML += `<div class="col-sm-12 col-lg-4 col-md-6 blog-card">
+
+
+
+// onSnapshot(collection(db, "UserDetails"), (snapshot) => {
+//   snapshot.forEach((doc) => {
+//     let data = doc.data()
+//     console.log(data.userUid)
+//     onAuthStateChanged(auth, (user) => {
+//       if (user) {
+//         const uid = user.uid;
+//         if (uid == data.userUid) {
+//           console.log('mil gaya')
+//           let data = doc.data()
+//           console.log(data, 'data hae');
+//           email.innerHTML = user.email
+//           name.innerText = data.userName
+//           let UserKaname = data.userName
+//           let img = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTdD2LkrqGa6G0A-JObFZNgHdbTDgXW-m2KQ&s'
+//           onSnapshot(collection(db, "UserPosts"), (snapshot) => {
+//             snapshot.forEach((doc) => {
+//               let data = doc.data()
+//               row.innerHTML += `<div class="col-sm-12 col-lg-4 col-md-6 blog-card">
 
                         
-              <div class="title">
-              <span id='span'>
-                  <img src=${img} alt="" width="4%" height='auto' style="border-radius: 80%;">
-                  <div class='nameDate'>
-                <h1>${UserKaname.charAt(0).toUpperCase()}${UserKaname.slice(1)}</h1>
-                <p>${data.posts.timestamp}</p>
-                </div>
-                </span>
-            </div>
-            <div class="description">
-            <h1> ${data.posts.title} </h1>
-                <p>${data.posts.text}</p>
-            </div>
-        </div>`
-            })
-          })
-        }
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
-        // ...
-      } else {
+//               <div class="title">
+//               <span id='span'>
+//                   <img src=${img} alt="" width="4%" height='auto' style="border-radius: 80%;">
+//                   <div class='nameDate'>
+//                 <h1>${UserKaname.charAt(0).toUpperCase()}${UserKaname.slice(1)}</h1>
+//                 <p>${data.posts.timestamp}</p>
+//                 </div>
+//                 </span>
+//             </div>
+//             <div class="description">
+//             <h1> ${data.posts.title} </h1>
+//                 <p>${data.posts.text}</p>
+//             </div>
+//         </div>`
+//             })
+//           })
+//         }
+//         // User is signed in, see docs for a list of available properties
+//         // https://firebase.google.com/docs/reference/js/auth.user
+//         // ...
+//       } else {
 
 
-      }
+//       }
 
-    })
-  })
-})
+//     })
+//   })
+// })
 
 let userProfile = document.getElementById('user-profile')
 
@@ -140,3 +197,8 @@ addposts.addEventListener('click' , (event) => {
     event.preventDefault()
     window.location.href = 'makepost.html'
 })
+
+
+function readMoreBtn(){
+  window.location.href = 'makepost.html'
+}
