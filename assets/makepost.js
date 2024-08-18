@@ -17,6 +17,17 @@ const auth = getAuth(app);
 const storage = getStorage(app);
 const db = getFirestore(app);
 
+
+onAuthStateChanged(auth, (user) => {
+if (user) {
+  const uid = user.uid;
+  console.log(user);
+  
+} else {
+  window.location.href = 'signup.html'
+}
+})
+
 const uploadFile = document.querySelector('.submitbtn');
 let loader = document.getElementById('loader')
 
@@ -44,6 +55,7 @@ uploadFile.addEventListener('click', (event) => {
     })
     .then((downloadURL) => {
       console.log('File available at', downloadURL);
+
       onAuthStateChanged(auth, (user) => {
         if (user) {
           const uid = user.uid;
@@ -53,12 +65,9 @@ uploadFile.addEventListener('click', (event) => {
             url: downloadURL,
             posts: {text: textarea.value , title:  title.value, file: file.name,timestamp: new Date().toDateString(),},
           });
-        addDoc(collection(db, "UserDetails"), {
-            userUid: uid,
-            url: downloadURL,
-            posts: {text: textarea.value , title:  title.value, file: file.name,timestamp: new Date().toDateString(),},
-          });
-          
+          textarea.value = ''
+          title.value = ''
+          file.name = ''
         } else {
           alert('masla arha ha')
         }

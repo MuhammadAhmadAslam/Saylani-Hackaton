@@ -95,31 +95,6 @@ function getPosts(){
             </div>
         </div>`
 
-//             postContainr.innerHTML += `<div class="image-name container mt-5">
-//       <div class="icon">
-//         <i class="fas fa-user"></i>
-//       </div>
-//       <div class="name">
-//         <h4>Muhammad Ahmed</h4>
-//         <p>${data.posts.timestamp}</p>
-//         <p></p>
-//       </div>
-//     </div>
-  
-//     <div class="text-area">
-//                     <p>${data.posts.text}</p>
-
-//     </div>
-  
-//   <div class='images-div'>
-//             <img src='' alt='' width='100%' height='500px'>
-//   </div>
-//     <div class="actions">
-//       <button class="like-button">Like</button>
-//       <button class="comment-button">Comment</button>
-//       <button class="share-button">Share</button>
-//     </div>
-//   </div>`
         })
     })
 }

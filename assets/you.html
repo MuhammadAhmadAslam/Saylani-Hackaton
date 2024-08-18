@@ -1,37 +1,99 @@
 <!DOCTYPE html>
+<!-- Coding by CodingLab | www.codinglabweb.com-->
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Profile</title>
-</head>
-<body>
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--<title>Profile Card UI Design</title>-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="you.css" />
 
-<h1>User Name</h1>
-<p>user Email</p>
-<h1>Posts</h1>
+    <!-- Boxicons CSS -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
 
 
-<div class="container">
-<div class="row" id="row">
-    <div class="col-sm-12 col-lg-4 col-md-6 blog-card">
-        <div class="title-image">
-            <img src="" alt="">
-        </div>
+
+
+    <h1 id="logo">PakBook</h1>
+    <div class="wrapper">
+      <input type="checkbox" id="btn" hidden>
+      <label for="btn" class="menu-btn">
+        <i class="fas fa-bars"></i>
+        <i class="fas fa-times"></i>
+      </label>
+      <nav id="sidebar">
         <div class="title">
-            <h1></h1>
-            <p></p>
+          PakBook
         </div>
-        <div class="description">
-            <p></p>
-        </div>
+        <ul class="list-items">
+          <li><a href="#"><i class="fas fa-home"></i>Home</a></li>
+          <li><a href="#"><i class="fas fa-cog"></i>Settings</a></li>
+          <li><a href="#"><i class="fas fa-stream"></i>Features</a></li>
+          <li><a href="#"><i class="fas fa-envelope"></i>Contact us</a></li>
+          <li id="user-profile"><a href="#"><i class="fas fa-user"></i>You</a></li>
+          <li id="logout-btn"><a href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a></li>
+        </ul>
+      </nav>
     </div>
-</div>
-</div>
 
 
-<script type="module" src="you.js"></script>
 
-</body>
+
+
+
+
+
+
+
+    <div class="profile-card">
+      <div class="image">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTdD2LkrqGa6G0A-JObFZNgHdbTDgXW-m2KQ&s" alt="" width="50%" style="margin-top: 60px; margin-left: 35px; border-radius: 50%;">
+
+      </div>
+
+      <div class="text-data">
+        <span class="name" id="name"></span>
+        <span class="email" id="email"></span>
+      </div>
+
+      <div class="media-buttons">
+        <a href="#" style="background: #4267b2" class="link">
+          <i class="bx bxl-facebook"></i>
+        </a>
+        <a href="#" style="background: #1da1f2" class="link">
+          <i class="bx bxl-twitter"></i>
+        </a>
+        <a href="#" style="background: #e1306c" class="link">
+          <i class="bx bxl-instagram"></i>
+        </a>
+        <a href="#" style="background: #ff0000" class="link">
+          <i class="bx bxl-youtube"></i>
+        </a>
+      </div>
+
+      <div class="buttons">
+        <button class="button">Subscribe</button>
+        <button class="button">Message</button>
+      </div>
+    </div>
+
+      <div class="posts">
+            <h1>Post</h1>
+        <div id="row">
+      </div>
+    </div>
+
+
+
+    <script src="you.js" type="module"></script>
+  </body>
 </html>

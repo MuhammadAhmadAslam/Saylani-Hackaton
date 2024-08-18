@@ -77,8 +77,9 @@ function signUpFunction() {
   const signupEmail = document.getElementById('signup-email')
   const signupPassword = document.getElementById('signup-password')
   const signupUserName = document.getElementById('signup-userName')
-  createUserWithEmailAndPassword(auth, signupEmail.value, signupPassword.value)
-  .then((userCredential) => {
+  if (signupUserName.value != '') {
+    createUserWithEmailAndPassword(auth, signupEmail.value, signupPassword.value)
+    .then((userCredential) => {
       const user = userCredential.user;
       signupEmail.value = ''
       signupPassword.value = ''
@@ -106,6 +107,7 @@ function signUpFunction() {
         text: errorCode,
       });
     });
+}
 }
 
 let signupbtn = document.getElementById('signupbtn')

@@ -32,6 +32,18 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 const db = getFirestore(app);
 
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    const uid = user.uid;
+    console.log(user);
+    
+  } else {
+    window.location.href = 'signup.html'
+  }
+  
+});
+
 window.addEventListener('click' , () => {
 
     onAuthStateChanged(auth, (user) => {
@@ -40,13 +52,15 @@ window.addEventListener('click' , () => {
         console.log(user);
         
       } else {
-        window.location.href = 'assets/signup.html'
+        window.location.href = 'signup.html'
       }
       
     });
     
   })
     let row = document.getElementById('row')
+let email  =  document.getElementById('email')
+let name = document.getElementById('name')
     onSnapshot(collection(db, "UserDetails"), (snapshot) => {
         snapshot.forEach((doc) => {
             let data = doc.data()
@@ -56,12 +70,14 @@ window.addEventListener('click' , () => {
                     const uid = user.uid;
                     if(uid == data.userUid){
                         console.log('mil gaya')
-                        console.log(user.email);
                         let data = doc.data()
-                        row.innerHTML += `        <div class="col-sm-12 col-lg-4 col-md-6 blog-card">
-            <div class="title-image">
-                <img src="" alt="">
-            </div>
+                        console.log(data , 'data hae');
+                        email.innerHTML = user.email
+                        name.innerText = data.userName
+                        onSnapshot(collection(db, "UserPosts"), (snapshot) => {
+                          snapshot.forEach((doc) => {
+                            let data = doc.data()
+                        row.innerHTML += `<div class="col-sm-12 col-lg-4 col-md-6 blog-card">
             <div class="title">
                 <h1>${data.posts.title}</h1>
                 <p>${data.posts.timestamp}</p>
@@ -70,16 +86,36 @@ window.addEventListener('click' , () => {
                 <p>${data.posts.text}</p>
             </div>
         </div>`
-                        
+                          })
+                        })                
                     }
                   // User is signed in, see docs for a list of available properties
                   // https://firebase.google.com/docs/reference/js/auth.user
                   // ...
                 } else {
-                  // User is signed out
-                  // ...
+                  
+                  
                 }
         
         })
     })
+})
+
+let userProfile = document.getElementById('user-profile')
+
+userProfile.addEventListener('click' ,(event) => {
+  event.preventDefault()
+  window.location.href = 'assets/you.html'
+})
+
+
+let logoutBtn = document.getElementById('logout-btn')
+console.log(logoutBtn);
+logoutBtn.addEventListener('click' , () => {
+    signOut(auth).then(() => {
+      console.log("User signed out successfully");
+      window.location.href = "signup.html"; 
+  }).catch((error) => {
+      console.error("Error signing out: ", error);
+  });
 })
