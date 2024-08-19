@@ -1,5 +1,10 @@
 
-* {box-sizing: border-box}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: white !important;
+}
 
 body {
   background-color: #d0d0d0;
@@ -16,16 +21,19 @@ body {
 }
 body{
     background-color: #F0F2F5 !important;
+    position: relative;
 }
 .wrapper{
   height: 100%;
   width: 300px;
-  position: relative;
+  position: absolute;
+  left: 0px;
+  top: 10px;
 }
 .wrapper .menu-btn{
   position: absolute;
   left: 20px;
-  top: 10px;
+  top: 0px;
   background: #4a4a4a;
   color: #fff;
   height: 45px;
@@ -178,8 +186,9 @@ body{
 }
 
 .create-post {
-  background-color: white;
-  width: 500px;
+  background-color: #404040;
+  max-width: 800px !important;
+  color: white !important;
   margin: 0 auto;
   border: 1px solid  #e2e0e0;
   border-radius: 10px;
@@ -189,18 +198,32 @@ body{
 .container {
   padding: 16px;
 }
-
+#title{
+  background: #f1f1f1b3;
+  width: 100%;
+  height: 60px;
+  border: none;
+  color: black !important;
+  font-weight: bold;
+  outline: none;
+  padding-left: 15px;
+}
 textarea{
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
   display: inline-block;
   border: none;
-  background: #f1f1f1;
+  background: #f1f1f1b3;
   resize: none;
+  color: black !important;
 }
 
 textarea:focus {
+  background-color: #ddd;
+  outline: none;
+}
+#title:focus {
   background-color: #ddd;
   outline: none;
 }
@@ -211,8 +234,10 @@ hr {
 }
 
 .submitbtn {
-  background-color: #232f3e;
-  color: white;
+  background-color: #fff;
+  color: #404040;
+  font-weight: bold;
+  font-size: 26px;
   padding: 16px 20px;
   margin: 23px 0;
   border: none;
@@ -220,9 +245,17 @@ hr {
   width: 100%;
   opacity: 0.9;
 }
-
+.drop-title{
+  color: black !important;
+}
+.drop-container{
+  background: #f1f1f1b3 !important;
+}
 .submitbtn:hover {
   opacity:1;
+}
+#file-input{
+    color: black !important;
 }
 
 a {
@@ -337,7 +370,7 @@ form label {
   width: 20px;
   height: 10px;
   margin: 0 5px;
-  background-color: #3498db;
+  background-color: #fff;
   border-radius: 5px;
   animation: loading-wave-animation 1s ease-in-out infinite;
 }
@@ -370,11 +403,26 @@ form label {
 .loader-none{
     display: none;
 }
+.submitbtn{
+  background: #f1f1f1b3;
+  color: #404040 !important;
+}
+input::placeholder{
+    color: black !important;
+}
+textarea::placeholder{
+    color: black !important;
+}
+.form:hover{
+  border: 1px dashed white !important;
+}
 
 
-
-
-
-
+#loader{
+    position: fixed;
+    top: 50%;
+    left: 40%;
+    /* right: 50%; */
+}
 
 

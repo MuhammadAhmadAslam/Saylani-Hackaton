@@ -28,21 +28,77 @@ if (user) {
 }
 })
 
+// const uploadFile = document.querySelector('.submitbtn');
+// let loader = document.getElementById('loader')
+
+// let showLoader = () => {
+//   loader.classList.remove('loader-none')
+//     loader.classList.add('loading-wave')
+// }
+// let HideLoader = () => {
+//     loader.classList.remove('loading-wave')
+//     loader.classList.add('loader-none')
+// }
+// HideLoader()
+
+// uploadFile.addEventListener('click', (event) => {
+//   event.preventDefault();
+//   showLoader()
+  
+//   const fileInput = document.getElementById('file-input');
+//   const file = fileInput.files[0];
+//   const textarea = document.getElementById('textarea')
+//   const title = document.getElementById('title')
+//   const postStorageRef = ref(storage, file.name);
+//   uploadBytes(postStorageRef, ref(storage, file.name))
+//     .then((snapshot) => {
+//       return getDownloadURL(snapshot.ref);
+//     })
+//     .then((downloadURL) => {
+//       console.log('File available at', downloadURL);
+
+//       onAuthStateChanged(auth, (user) => {
+//         if (user) {
+//           const uid = user.uid;
+//           console.log(user);
+//         addDoc(collection(db, "UserPosts"), {
+//             userUid: uid,
+//             url: downloadURL,
+//             posts: {text: textarea.value , title:  title.value, file: file.name,timestamp: new Date().toDateString(),},
+//           });
+//           textarea.value = ''
+//           title.value = ''
+//           file.name = ''
+//         } else {
+//           alert('masla arha ha')
+//         }
+//       });
+     
+//     })
+//     .then(() => {
+        
+//       HideLoader()
+//     })
+//     .catch((e) => alert(e.message));
+//     HideLoader()
+// });
+
 const uploadFile = document.querySelector('.submitbtn');
 let loader = document.getElementById('loader')
 
 let showLoader = () => {
   loader.classList.remove('loader-none')
-    loader.classList.add('loading-wave')
+  loader.classList.add('loading-wave')
 }
 let HideLoader = () => {
-    loader.classList.remove('loading-wave')
-    loader.classList.add('loader-none')
+  loader.classList.remove('loading-wave')
+  loader.classList.add('loader-none')
 }
 
 uploadFile.addEventListener('click', (event) => {
   event.preventDefault();
-  showLoader()
+  
+  showLoader(); // Show the loader when the submit button is clicked
   
   const fileInput = document.getElementById('file-input');
   const file = fileInput.files[0];
@@ -60,7 +116,7 @@ uploadFile.addEventListener('click', (event) => {
         if (user) {
           const uid = user.uid;
           console.log(user);
-        addDoc(collection(db, "UserPosts"), {
+          addDoc(collection(db, "UserPosts"), {
             userUid: uid,
             url: downloadURL,
             posts: {text: textarea.value , title:  title.value, file: file.name,timestamp: new Date().toDateString(),},
@@ -72,16 +128,24 @@ uploadFile.addEventListener('click', (event) => {
           alert('masla arha ha')
         }
       });
-     
     })
     .then(() => {
-        
-      HideLoader()
+      HideLoader(); // Hide the loader when the upload is complete
     })
-    .catch((e) => alert(e.message));
-    HideLoader()
+    .catch((e) => {
+      alert(e.message);
+      HideLoader(); // Hide the loader when the upload fails
+    });
 });
 
 
-
-
+let logoutBtn = document.getElementById('logout-btn')
+console.log(logoutBtn);
+logoutBtn.addEventListener('click' , () => {
+    signOut(auth).then(() => {
+      console.log("User signed out successfully");
+      window.location.href = "signup.html"; 
+  }).catch((error) => {
+      console.error("Error signing out: ", error);
+  });
+})

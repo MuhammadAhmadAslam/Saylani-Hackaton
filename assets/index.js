@@ -74,24 +74,26 @@ createAPost.addEventListener('click' ,(event) => {
 function getPosts(){
     let postContainr = document.getElementById('post-container')
     let blogrow = document.getElementById('blog-row')
-    blogrow.innerHTML = ''
+    blogrow.innerHTML = '';
+   
     onSnapshot(collection(db, "UserPosts"), (snapshot) => {
         snapshot.forEach((doc) => {
             console.log(doc.id);   
             console.log(doc.data() , 'data');   
             let data = doc.data()
-            console.log(data.url);
-                
-            blogrow.innerHTML += `        <div class="col-sm-12 col-lg-3 col-md-5 blog-card">
+            console.log(data);
+
+            blogrow.innerHTML += `        <div class="col-sm-12 col-lg-5 col-md-5 blog-card">
             <div class="title-image">
                 <img src="" alt="">
             </div>
             <div class="title">
-                <h1>${data.posts.title}</h1>
+                <h1>${data.posts.title.substring(0,30)} ${data.posts.text.length > 200 ? "...." : ''}</h1>
                 <p>${data.posts.timestamp}</p>
             </div>
             <div class="description">
-                <p>${data.posts.text}</p>
+                <p>${data.posts.text.substring(0, 200)}
+                ${data.posts.text.length > 200 ? ".... <a href='assets/fullscreen.html'>Read More</a>" : ''}</p>
             </div>
         </div>`
 

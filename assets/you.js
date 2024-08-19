@@ -52,7 +52,6 @@ onAuthStateChanged(auth, (user) => {
         if (uid == data.userUid) {
           // console.log('mil gaya')
           let data = doc.data()
-          // console.log(data, 'data hae');
           email.innerHTML = user.email
           name.innerText = data.userName
           let UserKaname = data.userName
@@ -67,7 +66,7 @@ onAuthStateChanged(auth, (user) => {
               let data = doc.data()
               // console.log(data , "user post data");
               // console.log(uid == data.userUid , "dekhtae hae" , uid , data.userUid);
-              if (uid== data.userUid) {
+              if (uid == data.userUid) {
                 hasPosts = true;
                 row.innerHTML += `<div class="col-sm-12 col-lg-4 col-md-6 blog-card">
 
@@ -83,7 +82,7 @@ onAuthStateChanged(auth, (user) => {
                             <div class="description">
                             <h1> ${data.posts.title} </h1>
                                <p id="text">${data.posts.text.substring(0, 200)}
-                                 ${data.posts.text.length > 200 ? ".... <a href='makepost.html'>Read More</a>" : ''}
+                                 ${data.posts.text.length > 200 ? ".... <a href='fullscreen.html'>Read More</a>" : ''}
                                </p>
                               
                             </div>
