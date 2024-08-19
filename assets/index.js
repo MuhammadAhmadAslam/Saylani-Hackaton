@@ -12,7 +12,7 @@ import { getAuth ,
  } 
   from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
-
+  import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js";
 
   import {getFirestore , collection , addDoc , getDocs, query,
    where,
@@ -31,7 +31,7 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 const db = getFirestore(app);
 
-
+const storage = getStorage(app);
   window.addEventListener('click' , () => {
 
     onAuthStateChanged(auth, (user) => {
@@ -74,16 +74,16 @@ createAPost.addEventListener('click' ,(event) => {
 function getPosts(){
     let postContainr = document.getElementById('post-container')
     let blogrow = document.getElementById('blog-row')
-    blogrow.innerHTML = '';
-   
+
     onSnapshot(collection(db, "UserPosts"), (snapshot) => {
         snapshot.forEach((doc) => {
             console.log(doc.id);   
             console.log(doc.data() , 'data');   
             let data = doc.data()
             console.log(data);
-
-            blogrow.innerHTML += `        <div class="col-sm-12 col-lg-5 col-md-5 blog-card">
+          console.log(data.url);
+          
+            blogrow.innerHTML += `<div class="col-sm-12 col-lg-5 col-md-5 blog-card">
             <div class="title-image">
                 <img src="" alt="">
             </div>

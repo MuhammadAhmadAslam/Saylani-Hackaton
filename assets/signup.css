@@ -16,7 +16,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(255, 0, 0, 0.47);
+    background-color: #404040;
     column-gap: 30px;
 }
 .form{
@@ -84,12 +84,13 @@ form{
 }
 .field button{
     color: #fff;
-    background-color: #0171d3;
+    background-color: #404040;
     transition: all 0.3s ease;
     cursor: pointer;
 }
 .field button:hover{
-    background-color: #016dcb;
+    background-color: #404040af;
+    color: black !important;
 }
 .form-link{
     text-align: center;
@@ -102,7 +103,7 @@ form{
     color: #232836;
 }
 .form a{
-    color: #0171d3;
+    color: #404040;
     text-decoration: none;
 }
 .form-content a:hover{
